@@ -1,56 +1,66 @@
-# ssism_cttm.py
-"""SSISM CTTM: Cybersecurity Pyinnyashi Training & Testing Model
-Author: U Ingar Soe
-License: CC BY 4.0
-"""
-
 import math
-from typing import Tuple
 
-class CTTM_Pyinnyashi_Cybersecurity_Engine:
-    def __init__(self, W_A=2.0, W_U=1.5, W_L=1.0, W_R=1.8, W_DT=1.7):
-        self.W_A = float(W_A)
-        self.W_U = float(W_U)
-        self.W_L = float(W_L)
-        self.W_R = float(W_R)
-        self.W_DT = float(W_DT)
+# SSISM V Smart Advisor Core Logic: Cybersecurity Pyinnyashi Training & Testing Model (CTTM)
 
-    def _validate_score(self, value: float, name: str) -> float:
-        v = float(value)
-        if v < 0.0 or v > 5.0:
-            raise ValueError(f"{name} out of range [0.0, 5.0]: {v}")
-        return v
+# -----------------------------------------------------------------------------------
+# A: Authority Score (0-5, 5=Highest Authority Claim)
+# U: Urgency Score (0-5, 5=Extreme Time Pressure)
+# L: Linguistics Score (0-5, 5=Poor/Suspicious Language)
+# R: Link/File Risk Score (0-5, 5=Untrustworthy/Unknown Link)
+# dT: Time Anomaly Score (0-5, 5=Highly Unusual Contact Time)
+# -----------------------------------------------------------------------------------
 
-    def calculate_phi(self, A, U, L, R, DT) -> float:
-        A = self._validate_score(A, "Authority")
-        U = self._validate_score(U, "Urgency")
-        L = self._validate_score(L, "Linguistics")
-        R = self._validate_score(R, "LinkRisk")
-        DT = self._validate_score(DT, "DeltaTime")
-        Z = (self.W_A*A) + (self.W_U*U) + (self.W_L*L) + (self.W_R*R) + (self.W_DT*DT)
-        phi = 1 / (1 + math.exp(-Z))
-        return phi
+def calculate_digital_trust_score(A, U, L, R, dT):
+    """
+    Calculates the Digital Trust Score (Phi) using a weighted Logistic Regression model.
+    A score < 0.2 triggers the MANDATORY LOCKOUT.
+    
+    Inputs (scores 0-5): Authority (A), Urgency (U), Linguistics (L), Link/File (R), Time Anomaly (dT)
+    
+    Returns: Tuple (Phi_score, Action_Message)
+    """
+    
+    # ----------------------------------
+    # Pre-Calibrated Weights (W) based on real-world scam experiences
+    # Urgency and Authority are typically the heaviest indicators
+    W_A = 2.0  # Weight for Authority
+    W_U = 1.5  # Weight for Urgency
+    W_L = 1.0  # Weight for Linguistics
+    W_R = 1.2  # Weight for Link/File Risk
+    W_dT = 1.3 # Weight for Time Anomaly
+    # ----------------------------------
+    
+    # 1. Calculate the Total Risk Score (Z) - Linear aggregation of weighted factors
+    Z = (W_A * A) + (W_U * U) + (W_L * L) + (W_R * R) + (W_dT * dT)
+    
+    # We use the negative of Z for the Sigmoid function to map high risk (high Z) to low trust (low Phi)
+    
+    # 2. Calculate the Digital Trust Score (Phi) using the Sigmoid (Logistic) Function
+    # Phi = 1 / (1 + e^Z)  <-- maps High Z (Risk) to Low Phi (Trust)
+    try:
+        Phi = 1 / (1 + math.exp(Z))
+    except OverflowError:
+        # Handle extreme Z values gracefully
+        Phi = 0.0001
+        
+    # Define the MANDATORY LOCKOUT Threshold (Phi < 0.2)
+    LOCKOUT_THRESHOLD = 0.2 
+    
+    # 3. Enforce the SSISM MANDATORY LOCKOUT Rule
+    if Phi < LOCKOUT_THRESHOLD:
+        action_message = "MANDATORY LOCKOUT: Digital Trust Score is below 0.2. A 24-HOUR VERIFICATION PROTOCOL IS REQUIRED."
+    else:
+        action_message = "Digital Trust Score is Acceptable (Proceed with Caution)."
+        
+    return round(Phi, 4), action_message
 
-    def get_advisor_verdict(self, phi_score: float) -> Tuple[str, float]:
-        if not (0.0 < phi_score < 1.0):
-            raise ValueError("phi_score must be in (0,1)")
-        CRITICAL_THRESHOLD = 0.20
-        if phi_score < CRITICAL_THRESHOLD:
-            msg = f"MANDATORY LOCKOUT: Severe Social Engineering Detected. (PHI: {phi_score:.6f})"
-        else:
-            msg = f"PHI_SAFE: Communication verified. Proceed with awareness. (PHI: {phi_score:.6f})"
-        return msg, phi_score
+# --- Example Usage ---
+# Scenario 1: High Urgency (U=5), High Authority (A=5) -> Should trigger LOCKOUT
+score_high_risk, message_high_risk = calculate_digital_trust_score(A=5, U=5, L=1, R=1, dT=0)
+print(f"Scenario 1 - Digital Trust Score (Phi): {score_high_risk}")
+print(f"Action: {message_high_risk}\n")
 
-if __name__ == "__main__":
-    print("--- SSISM CTTM Cybersecurity Model ---")
-    engine = CTTM_Pyinnyashi_Cybersecurity_Engine()
-
-    # Test Case: Authority Scam
-    phi_scam = engine.calculate_phi(4.5,4.0,2.0,3.5,5.0)
-    verdict_scam, _ = engine.get_advisor_verdict(phi_scam)
-    print("\nAuthority Scam Test:", verdict_scam)
-
-    # Test Case: Low Risk Communication
-    phi_safe = engine.calculate_phi(1.0,1.0,1.0,0.5,1.0)
-    verdict_safe, _ = engine.get_advisor_verdict(phi_safe)
-    print("\nLow Risk Communication Test:", verdict_safe)
+# Scenario 2: Low Risk (All low scores) -> Should be Acceptable
+score_low_risk, message_low_risk = calculate_digital_trust_score(A=0, U=0, L=0, R=0, dT=0)
+print(f"Scenario 2 - Digital Trust Score (Phi): {score_low_risk}")
+print(f"Action: {message_low_risk}\n")
