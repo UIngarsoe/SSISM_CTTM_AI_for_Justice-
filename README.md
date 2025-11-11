@@ -1,6 +1,6 @@
 SSISM_CTTM_AI_for_Justice — Academic Framework Repository
 
-Title: Understanding Intelligent Military Organizations  
+Title: Understanding Military Intelligent Organizations  
 Subtitle: A Framework for Civil Society, Ethical AI, and Defensive Intelligence  
 Author: U Ingar Soe (2025)  
 Version: 1.0 — “Intelligence Beyond Fear” Edition  
