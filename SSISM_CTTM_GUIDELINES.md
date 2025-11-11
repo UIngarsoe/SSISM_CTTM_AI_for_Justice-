@@ -111,3 +111,14 @@ def calculate_digital_trust_score(A, U, L, R, dT):
 # Example: High-Risk Scenario
 Phi_score = calculate_digital_trust_score(A=4, U=3, L=2, R=2, dT=3)
 print(f"Digital Trust Score (Φ): {Phi_score:.4f}")
+
+VI. Integration with SSISM V Smart Advisor
+For practical implementation and scenario testing, see
+ssism_cttm.py.
+It demonstrates full advisory logic, LOCKOUT enforcement, and adaptive weighting.
+VII. References
+UN Digital Safety Guidelines
+Access Now & Citizen Lab Reports
+SSISM Atrocity Index (GitHub)
+Soe, U. (2025). Understanding Intelligent Military Organizations: A Framework for Civil Society and Ethical AI. SSISM CTTM Project.
+SSISM CTTM 2025 — Cybersecurity Through Awareness, Not Aggression.
