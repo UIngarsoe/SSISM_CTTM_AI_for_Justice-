@@ -1,0 +1,127 @@
+SSISM CTTM — Step-by-Step Guide for Civil Society
+Goal: Teach teams how to use the SSISM tools to detect manipulation, protect communities, and build long-term civic resilience — ethically and legally.
+ 
+Quick orientation (2 minutes)
+•	What it is: SSISM CTTM = an open-source defensive AI model that computes a Digital Trust Score (Φ) for communications.
+•	Purpose: Protect truth without hatred; detect deceit without anger; train awareness without ego.
+•	Core rule: If Φ < 0.2 → MANDATORY LOCKOUT (24-hour freeze before action).
+ 
+Phase 0 — Prepare (before you run anything)
+1.	Assemble a small team (2–6 people): one trainer, one tech lead, 1–3 community liaisons.
+2.	Secure your devices: 
+o	Use updated OS and antivirus.
+o	Use end-to-end encrypted messaging for internal communication (Signal).
+o	Create a separate account / folder for SSISM work (so sensitive files are isolated).
+3.	Backups & keys: store any sensitive keys/passwords in an encrypted vault (e.g., KeePassXC, not cloud unless encrypted).
+ 
+Phase 1 — Get the repo (10–20 minutes)
+1.	Clone the repo (if team member can run git):
+git clone https://github.com/UIngarsoe/SSISM_CTTM_AI_for_Justice-.git
+cd SSISM_CTTM_AI_for_Justice-
+2.	If someone prefers manual download: use Download ZIP from GitHub, then unzip.
+3.	Files to open first (non-code readers):
+o	README.md
+o	SSISM_CTTM_GUIDELINES.md
+o	Understanding_Intelligent_Military_Organizations.md
+ 
+Phase 2 — Run the demo locally (technical, 5–15 minutes)
+(One tech person needed; uses Python 3)
+1.	Ensure Python 3 installed. Create virtual environment (optional but recommended):
+python3 -m venv venv
+source venv/bin/activate     # Linux/Mac
+venv\Scripts\activate        # Windows
+pip install --upgrade pip
+2.	Run the demo script (example name: ssism_cttm_v2025_gn1.py or ssism_cttm.py):
+python ssism_cttm_v2025_gn1.py
+3.	Observe example outputs — they show Phi values and action messages (Lockout vs Proceed).
+If you cannot run code, proceed with the non-technical workshop steps below (Phase 3). The repository still fully supports learning without execution.
+ 
+Phase 3 — Community workshop: teach the idea (30–90 minutes)
+Audience: activists, students, journalists, community leaders.
+1.	Intro (10 min): Explain what social engineering is (authority + urgency tricks). Show one real example (non-sensitive) and how it manipulates behavior.
+2.	Phi logic (15 min): Explain the five factors simply:
+o	Authority (who claims power?)
+o	Urgency (is it pushing immediate action?)
+o	Linguistics (tone, threats, grammatical oddities)
+o	Link/File risk (unknown links, attachments)
+o	Time anomaly (odd hours, out-of-context messages)
+3.	Interactive exercise (15–30 min):
+o	Present 4 sample messages; ask groups to score A, U, L, R, dT (0–5 each).
+o	Use the Python demo (tech lead) or a spreadsheet with the sigmoid mapping to compute Phi.
+o	Discuss what the lockout decision means.
+4.	Lockout rule practice (10–15 min):
+o	If Phi < 0.2 → practice a 24-hour verification protocol: verify via independent channel, request official proof, ask others to confirm.
+o	Make a checklist: who verifies, how to document verification, how to re-activate action.
+ 
+Phase 4 — Operationalize for everyday safety (ongoing)
+1.	Adopt the LOCKOUT policy across the organization:
+o	Codify: “If SSISM returns LOCKOUT, no financial or operational action for 24 hours.”
+o	Provide a verification escalation path (two trusted validators).
+2.	Use tools for secure communication:
+o	Messaging: Signal (E2EE), Session, or Wire
+o	Email: ProtonMail or Tutanota for sensitive correspondence
+o	Metadata protection: use Tor or trusted VPN when needed to browse/verify sources (avoid illegal activities)
+3.	Minimize stored sensitive data: Only keep what you need. Encrypt stored files.
+4.	Create a simple dashboard (optional): export Phi outputs to CSV and create a one-page status board for decision makers.
+ 
+Phase 5 — Training & capacity building (3–12 months)
+1.	Monthly training sessions using real scenarios (redacted).
+2.	Train-the-trainer program: pick community trainers and certify them on the CTTM method.
+3.	Simulations: role play phishing, authority scams, and communal verification exercises.
+4.	Documentation: keep a secure log of decisions and outcomes (redact identities) to build local datasets.
+ 
+Phase 6 — Community sharing & scaling (3–24 months)
+1.	Publish sanitized case studies: show how Lockout saved funds or prevented harm. This builds trust.
+2.	Translate docs: Burmese and other local languages; add to /docs/.
+3.	Invite contributors using CONTRIBUTING.md — focus on translators, educators, and UX designers.
+4.	Form an alliance: partner with local NGOs, Access Now, or regional human rights groups for training partnerships.
+ 
+Ethical & safety rules (must follow)
+•	Never use SSISM for targeting, hacking, or surveillance. This is defensive only.
+•	Respect privacy: never collect or expose personal data without consent.
+•	Do no harm: if a Lockout could endanger someone (e.g., immediate safety risk), follow humanitarian safety protocols first — the Lockout is for social engineering — not for emergency life-saving action.
+•	Document decisions — transparency builds accountability.
+ 
+Low-tech alternatives (if internet or devices limited)
+•	Use printed scoring sheets with the five factors and a precomputed lookup table for Phi ranges (e.g., Z→Phi).
+•	Conduct workshops and roleplay; track decisions on paper logs stored securely.
+ 
+How to interpret Phi in practice (cheat sheet)
+•	Φ ≥ 0.5 — Low risk: proceed with caution.
+•	0.2 ≤ Φ < 0.5 — Medium risk: verify, cross-check.
+•	Φ < 0.2 — High risk: MANDATORY LOCKOUT (24 hours). No action until verification.
+(Thresholds are practical guidelines; groups can adapt to context but must document changes.)
+ 
+Sample verification checklist (for Lockout)
+1.	Has the sender used official, verifiable channels? (call to official number)
+2.	Is there independent confirmation from at least two trusted sources?
+3.	Is there a verifiable public record (press release, official site, government publication)?
+4.	Is the request financial/operational? If yes, require notarized/official documentation.
+5.	Document verification steps and outcomes.
+ 
+Safety-first escalation pathway
+•	If tool signals Lockout but a person is in immediate danger: prioritize human safety (call emergency services, trusted NGO, or local support). The Lockout is not for life-saving triage.
+ 
+Building trust & community buy-in
+•	Publicly publish your principles and how you use SSISM (without sensitive logs) — transparency reduces suspicion.
+•	Run public workshops and invite local leaders.
+•	Publish sanitized success stories to encourage adoption.
+ 
+Maintaining & updating the system
+•	Version control: tag releases (v1.0, v2025-GN1).
+•	Keep a changelog (CHANGELOG.md).
+•	Review and recalibrate weights quarterly or after major events. Use documented test-cases.
+ 
+When to ask for help
+•	If you suspect a sophisticated campaign or threats to staff safety: reach out to trusted digital security organizations (e.g., Digital Security Helpline groups, Citizen Lab, Access Now) — do not try to handle advanced attacks alone.
+ 
+Quick resources (starter list)
+•	Signal (messaging) — secure comms
+•	ProtonMail (email) — secure email
+•	Tor Browser — metadata protection (use responsibly)
+•	KeePassXC — local password vault
+•	GitHub — repository and collaboration
+•	Citizen Lab / Access Now — digital rights & incident help
+ 
+End of the guide. 
+
